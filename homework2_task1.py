@@ -52,8 +52,10 @@ s.find('a') # 8
 
 # 8. Разбейте строку на список подстрок по символу пробела.
 s = 'Hello dear Alibaba'
-s.split(' ') # ['Hello', 'dear', 'Alibaba']
-
+#s.split(' ') # ['Hello', 'dear', 'Alibaba']
+s.split(' ')
+print(s.split(' '))
+print(s.split())
 # 9. Пусть у вас строка имеет пробельные символы. Найдите метод, который удаляет
 # пробельные символы вначале и в конце, но не посередине.
 s = '   Hello dear Alibaba   '
