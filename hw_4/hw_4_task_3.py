@@ -7,17 +7,21 @@ from math import sqrt
 def input_number():
     """ Пишем функцию, которая попросит ввести число. Пока он не введёт правильно, просите
         его ввести. Функция возвращает введённое число """
-    number = input("Type the number: ")
-    try:
-        float(number)
-        print(f'Your number is {number}')
 
-    except ValueError:
-        print('This is not a number!')
-        input_number()
+    while True:
+        number = input("Type the number: ")
+
+        try:
+            float(number)
+            #print(f'Your number is {number}')
+            break
+        except ValueError:
+            print('This is not a number!')
+            continue
+
     return number
 
-#input_number()
+#print(input_number())
 
 
 
@@ -32,14 +36,26 @@ def input_word():
 
         inp = input('Type without spaces: ')
         inp = inp.strip()
-        if inp.count(' ') > 0:
-            continue
-        else:
-            break
+
+        try:
+            if inp.count(' ') < 0:
+                break
+
+
+        except:
+            print('Do not use space inside')
+
+
+            # for i in inp:
+            #     if not i.isalpha():
+            #         print('Only letters!')
+
+
+
 
     return inp
 
-#input_word()
+print(input_word())
 
 
 

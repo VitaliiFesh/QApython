@@ -9,7 +9,12 @@ def find_second_min_element(*args):
     # find min element in list created by tuple 'args'
 
     ls = list(args)
-    first_min_element = min(ls)
+
+    try:
+        first_min_element = min(ls)
+    except ValueError:
+        message = 'Not applicable. Error 0x01. No arguments.'
+        return message
 
     # remove min_element from list and all duplicates
     while True:
@@ -18,7 +23,13 @@ def find_second_min_element(*args):
         else:
             break
 
-    return min(ls)
+
+    try:
+        second_min_element = min(ls)
+    except ValueError:
+        message = 'Not applicable. Error 0x02. All arguments have the same value.'
+        return message
+    return second_min_element
 
 
-print(find_second_min_element(-2,3,5,-44,-44,7,-2,1,0,-44,5,-1))
+print(find_second_min_element(4,5,2))

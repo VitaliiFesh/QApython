@@ -22,5 +22,5 @@ def la_la_la(string=3, n=3, end=0):
 
 
 
-print(la_la_la(end=1))
+print(la_la_la(n=100))
 

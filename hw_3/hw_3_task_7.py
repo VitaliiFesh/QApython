@@ -35,7 +35,6 @@ print(f'Sorted list: \n{ls}', end='\n\n')
 # creating a dict from list with 'None' values for each key
 d = dict.fromkeys(ls)
 
-
 # counting each repetition in the list and presenting that number to keys respectively
 for i in d:
     d[i] = ls.count(i)
