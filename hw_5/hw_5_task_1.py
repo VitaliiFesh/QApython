@@ -6,8 +6,10 @@ from datetime import datetime
 current_year = datetime.now().year
 
 class Person:
-    """ Basic class of all persons. Using as parent for all child classes
-        Three methods: get_name(), get_last_name() and age_in() """
+    """
+        Basic class of all persons. Using as parent for all child classes
+        Three methods: get_name(), get_last_name() and age_in()
+    """
 
     def __init__(self, name, last_name, birth_year):
         self.full_name = str(name).strip() + ' ' + str(last_name).strip()
@@ -24,7 +26,10 @@ class Person:
 
 
     def get_name(self):
-        """segregating name from full_name """
+        """
+        segregating name from full_name
+
+        """
 
         # full_name >> string, so find index of ' ' and take string[:index]. It's a name.
         self.name = self.full_name[:self.full_name.index(' ')]
@@ -38,8 +43,10 @@ class Person:
 
     def age_in(self, year=current_year):
 
-        """ вычисляет сколько лет было/есть/исполнится в году, который передаётся параметром (obj.age_in(year));
-            если не передавать параметр, по умолчанию, сколько лет в этом году"""
+        """
+        вычисляет сколько лет было/есть/исполнится в году, который передаётся параметром (obj.age_in(year));
+        если не передавать параметр, по умолчанию, сколько лет в этом году
+        """
 
         try:
             self.age = year - self.birth_year
@@ -50,8 +57,10 @@ class Person:
 
 class Employee(Person):
 
-    """ Employee - the second level class in the parents tree.
-        Two additional methods: get_position() and raise_salary() """
+    """
+        Employee - the second level class in the parents tree.
+        Two additional methods: get_position() and raise_salary()
+    """
 
     def __init__(self, name, last_name, birth_year, position, experience, salary):
         super().__init__(name, last_name, birth_year)
@@ -79,9 +88,11 @@ class Employee(Person):
         return f'Employee: {self.full_name}, {self.position}'
 
     def get_position(self):
-        """ If employee works less then 3 years >> Junior.
-            if from 3 to 6 years >> Middle
-            if 6 and more >> Senior """
+        """
+        If employee works less then 3 years >> Junior.
+        if from 3 to 6 years >> Middle
+        if 6 and more >> Senior
+        """
 
         if self.experience < 3:
             return f'Junior {self.position}'
@@ -93,7 +104,9 @@ class Employee(Person):
             return f'{self.experience} might got a wrong value'
 
     def raise_salary(self, dollars):
-        """We can raise the salary by argument in this function"""
+        """
+        We can raise the salary by argument in this function
+        """
         self.salary += dollars
         return self.salary
 
@@ -101,8 +114,10 @@ class Employee(Person):
 
 class ITemployee(Employee):
 
-    """ IT employee - the third level class in the parents tree.
-        One additional method add_skills(). """
+    """
+        IT employee - the third level class in the parents tree.
+        One additional method add_skills().
+    """
 
     def __init__(self, name, last_name, birth_year, position, experience, salary):
         super().__init__(name, last_name, birth_year, position, experience, salary)
@@ -114,7 +129,9 @@ class ITemployee(Employee):
                f' His main skills: {self.skills}'
 
     def add_skills(self, *args):
-        """This method allows to add one or several skills in the list. """
+        """
+        This method allows to add one or several skills in the list.
+        """
 
         for i in args:
 
