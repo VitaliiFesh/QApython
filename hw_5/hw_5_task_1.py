@@ -6,6 +6,8 @@ from datetime import datetime
 current_year = datetime.now().year
 
 class Person:
+    """ Basic class of all persons. Using as parent for all child classes
+        Three methods: get_name(), get_last_name() and age_in() """
 
     def __init__(self, name, last_name, birth_year):
         self.full_name = str(name).strip() + ' ' + str(last_name).strip()
@@ -17,7 +19,12 @@ class Person:
             print(self.birth_year)
 
 
+    def __str__(self):
+        return f'{self.full_name}, born {self.birth_year}'
+
+
     def get_name(self):
+        """segregating name from full_name """
 
         # full_name >> string, so find index of ' ' and take string[:index]. It's a name.
         self.name = self.full_name[:self.full_name.index(' ')]
@@ -43,6 +50,9 @@ class Person:
 
 class Employee(Person):
 
+    """ Employee - the second level class in the parents tree.
+        Two additional methods: get_position() and raise_salary() """
+
     def __init__(self, name, last_name, birth_year, position, experience, salary):
         super().__init__(name, last_name, birth_year)
         self.position = position
@@ -53,9 +63,25 @@ class Employee(Person):
             assert self.experience and self.salary >= 0
 
         except:
-            print('Salary and experience must be a positive value')
+
+            if self.salary < 0 and self.experience < 0:
+                print(f'Salary: {self.salary} and Experience: {self.experience} were modified as positive value.')
+
+            elif self.salary < 0:
+                print(f'Salary: {self.salary} was modified as positive value.')
+            elif self.experience < 0:
+                print(f'Experience: {self.experience} was modified as positive value.')
+
+            self.experience = abs(self.experience)
+            self.salary = abs(self.experience)
+
+    def __str__(self):
+        return f'Employee: {self.full_name}, {self.position}'
 
     def get_position(self):
+        """ If employee works less then 3 years >> Junior.
+            if from 3 to 6 years >> Middle
+            if 6 and more >> Senior """
 
         if self.experience < 3:
             return f'Junior {self.position}'
@@ -66,8 +92,43 @@ class Employee(Person):
         else:
             return f'{self.experience} might got a wrong value'
 
-#p1 = Person('Michael', 'Lopez', 1989)
-e1 = Employee(name='Alex', last_name='Kooler', birth_year=1992, position='Support Engineer', experience=4, salary=1700)
+    def raise_salary(self, dollars):
+        """We can raise the salary by argument in this function"""
+        self.salary += dollars
+        return self.salary
 
-print(e1.get_position())
 
+
+class ITemployee(Employee):
+
+    """ IT employee - the third level class in the parents tree.
+        One additional method add_skills(). """
+
+    def __init__(self, name, last_name, birth_year, position, experience, salary):
+        super().__init__(name, last_name, birth_year, position, experience, salary)
+        self.skills = []
+
+    def __str__(self):
+
+        return f'IT employee: {self.full_name}, {self.position} with {self.experience} years of experience and {self.salary}$ of income.' \
+               f' His main skills: {self.skills}'
+
+    def add_skills(self, *args):
+        """This method allows to add one or several skills in the list. """
+
+        for i in args:
+
+            self.skills.append(i)
+        return self.skills
+
+
+
+p1 = Person('Michael', 'Lopez', 1989)
+e1 = Employee(name='Alex', last_name='Kooler', birth_year=1992, position='Support Engineer', experience=-4, salary=1700)
+it_e1 = ITemployee(name='Bob', last_name='Robin', birth_year=1993, position='Python Developer', experience=2, salary=1200)
+
+it_e1.add_skills('SQL', 'Linux')
+it_e1.add_skills('Windows Server', 'Pygame')
+print(it_e1)
+print(e1)
+print(p1)
