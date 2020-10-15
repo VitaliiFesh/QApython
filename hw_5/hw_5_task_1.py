@@ -146,6 +146,6 @@ it_e1 = ITemployee(name='Bob', last_name='Robin', birth_year=1993, position='Pyt
 
 it_e1.add_skills('SQL', 'Linux')
 it_e1.add_skills('Windows Server', 'Pygame')
-print(it_e1)
-print(e1)
-print(p1)
+# print(it_e1)
+# print(e1)
+# print(p1)
