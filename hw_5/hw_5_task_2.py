@@ -11,6 +11,9 @@ class Rectange:
         self.a = a
         self.b = b
 
+    def __str__(self):
+        return f'Rectangle {self.a}, {self.b} '
+
     def calc_square(self):
         self.square = self.a * self.b
 
@@ -31,6 +34,9 @@ class Student:
         self.occupation = occupation
         self.year_of_start = year_of_start
         self.marks = marks
+
+    def __str__(self):
+        return f'{self.full_name}, {self.occupation}'
 
     def add_new_mark(self, new_mark):
         self.marks.append(new_mark)
@@ -76,8 +82,7 @@ class Point:
 
 
 p1 = Point(3, 4)
-p2 = Point(5, '4')
+p2 = Point(5, 4)
 
-print(p1.distance_to_another_point(p2))
 
 
