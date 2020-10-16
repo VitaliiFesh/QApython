@@ -11,18 +11,18 @@ class Person:
         Three methods: get_name(), get_last_name() and age_in()
     """
 
-    def __init__(self, name, last_name, birth_year):
+    def __init__(self, name, last_name, birth_year=None):
         self.full_name = str(name).strip() + ' ' + str(last_name).strip()
         self.birth_year = birth_year
         try:
             assert 1900 < self.birth_year < current_year
         except:
-            self.birth_year = f'Please type another birth year for {self.full_name}'
-            print(self.birth_year)
+            self.birth_year = f'Please type a valid birth year for {self.full_name}'
+
 
 
     def __str__(self):
-        return f'{self.full_name}, born {self.birth_year}'
+        return f'{self.full_name}'
 
 
     def get_name(self):
@@ -50,9 +50,12 @@ class Person:
 
         try:
             self.age = year - self.birth_year
-            return self.age
+            if year == current_year:
+                return f'{self.full_name}, {self.age} years old'
+            else:
+                return f'{self.full_name}, {self.age} years old in {year}'
         except TypeError:
-            return f'Error 0x02. Original birth year is not valid.'
+            return f'Error 0x02. Original birth year: {self.birth_year}({type(self.birth_year)}) or year: {year}({type(year)}) is not int value.'
 
 
 class Employee(Person):
@@ -62,7 +65,7 @@ class Employee(Person):
         Two additional methods: get_position() and raise_salary()
     """
 
-    def __init__(self, name, last_name, birth_year, position, experience, salary):
+    def __init__(self, name, last_name, birth_year=None, position=None, experience=0, salary=0):
         super().__init__(name, last_name, birth_year)
         self.position = position
         self.experience = experience
@@ -74,7 +77,7 @@ class Employee(Person):
         except:
 
             if self.salary < 0 and self.experience < 0:
-                print(f'Salary: {self.salary} and Experience: {self.experience} were modified as positive value.')
+                print(f'Salary: {self.salary} and Experience: {self.experience} were modified as positive values.')
 
             elif self.salary < 0:
                 print(f'Salary: {self.salary} was modified as positive value.')
@@ -85,7 +88,7 @@ class Employee(Person):
             self.salary = abs(self.experience)
 
     def __str__(self):
-        return f'Employee: {self.full_name}, {self.position}'
+        return f'Employee: {self.full_name}, possition: {self.position}, salary: {self.salary}'
 
     def get_position(self):
         """
@@ -119,13 +122,13 @@ class ITemployee(Employee):
         One additional method add_skills().
     """
 
-    def __init__(self, name, last_name, birth_year, position, experience, salary):
+    def __init__(self, name, last_name, birth_year=None, position=None, experience=0, salary=0):
         super().__init__(name, last_name, birth_year, position, experience, salary)
         self.skills = []
 
     def __str__(self):
 
-        return f'IT employee: {self.full_name}, {self.position} with {self.experience} years of experience and {self.salary}$ of income.' \
+        return f'IT employee: {self.full_name}, position: {self.position} with {self.experience} years of experience, salary: {self.salary}$.' \
                f' His main skills: {self.skills}'
 
     def add_skills(self, *args):
@@ -140,9 +143,13 @@ class ITemployee(Employee):
 
 
 
-p1 = Person('Michael', 'Lopez', 1989)
+p1 = Person('Michael', 'Lopez', 1995)
+e2 = Employee('Hovard', 'Fort')
+it_e2 = ITemployee('Ralph', 'Kyzmenko')
+print(it_e2)
 e1 = Employee(name='Alex', last_name='Kooler', birth_year=1992, position='Support Engineer', experience=-4, salary=1700)
 it_e1 = ITemployee(name='Bob', last_name='Robin', birth_year=1993, position='Python Developer', experience=2, salary=1200)
+
 
 it_e1.add_skills('SQL', 'Linux')
 it_e1.add_skills('Windows Server', 'Pygame')
