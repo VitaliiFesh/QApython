@@ -51,9 +51,7 @@ class Person:
         try:
             self.age = year - self.birth_year
             if year == current_year:
-                return f'{self.full_name}, {self.age} years old'
-            else:
-                return f'{self.full_name}, {self.age} years old in {year}'
+                return self.age
         except TypeError:
             return f'Error 0x02. Original birth year: {self.birth_year}({type(self.birth_year)}) or year: {year}({type(year)}) is not int value.'
 
@@ -65,7 +63,7 @@ class Employee(Person):
         Two additional methods: get_position() and raise_salary()
     """
 
-    def __init__(self, name, last_name, birth_year=None, position=None, experience=0, salary=0):
+    def __init__(self, name, last_name, birth_year=None, position=None, salary=0, experience=0):
         super().__init__(name, last_name, birth_year)
         self.position = position
         self.experience = experience
@@ -85,7 +83,7 @@ class Employee(Person):
                 print(f'Experience: {self.experience} was modified as positive value.')
 
             self.experience = abs(self.experience)
-            self.salary = abs(self.experience)
+            self.salary = abs(self.salary)
 
     def __str__(self):
         return f'Employee: {self.full_name}, possition: {self.position}, salary: {self.salary}'
@@ -101,7 +99,7 @@ class Employee(Person):
             return f'Junior {self.position}'
         elif 3 <= self.experience < 6:
             return f'Middle {self.position}'
-        elif self.position >= 6:
+        elif self.experience >= 6:
             return f'Senior {self.position}'
         else:
             return f'{self.experience} might got a wrong value'
@@ -122,13 +120,13 @@ class ITemployee(Employee):
         One additional method add_skills().
     """
 
-    def __init__(self, name, last_name, birth_year=None, position=None, experience=0, salary=0):
-        super().__init__(name, last_name, birth_year, position, experience, salary)
-        self.skills = []
+    def __init__(self, name, last_name, birth_year=None, position=None, salary=0, experience=0, skills = []):
+        super().__init__(name, last_name, birth_year, position, salary, experience)
+        self.skills = skills
 
     def __str__(self):
 
-        return f'IT employee: {self.full_name}, position: {self.position} with {self.experience} years of experience, salary: {self.salary}$.' \
+        return f'IT employee: {self.full_name}, position: {self.position}, with {self.experience} years of experience, salary: {self.salary}$.' \
                f' His main skills: {self.skills}'
 
     def add_skills(self, *args):
@@ -145,14 +143,13 @@ class ITemployee(Employee):
 
 p1 = Person('Michael', 'Lopez', 1995)
 e2 = Employee('Hovard', 'Fort')
-it_e2 = ITemployee('Ralph', 'Kyzmenko')
-print(it_e2)
-e1 = Employee(name='Alex', last_name='Kooler', birth_year=1992, position='Support Engineer', experience=-4, salary=1700)
-it_e1 = ITemployee(name='Bob', last_name='Robin', birth_year=1993, position='Python Developer', experience=2, salary=1200)
+it_e2 = ITemployee('Ralph', 'Kyzmenko', 1991, salary=550)
 
 
-it_e1.add_skills('SQL', 'Linux')
-it_e1.add_skills('Windows Server', 'Pygame')
-# print(it_e1)
-# print(e1)
-# print(p1)
+# ==================================
+# e4 = Employee('Ralph', 'Kyzmenko', 1991, position='Engineer', salary=4)
+# print(f'{e4.full_name}, salary:{e4.salary}; experience: {e4.experience}; age: {e4.age_in()}; position: {e4.position}')
+
+# ==================================
+
+
